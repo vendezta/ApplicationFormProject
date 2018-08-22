@@ -158,6 +158,9 @@ span.round-tab:hover {
 .p-r-0{
 	padding-right: 0px !important;
 }
+.p-t-25{
+	padding-top: 25px !important;
+}
 
 .text-center{
 	text-align: center;
@@ -179,6 +182,9 @@ span.round-tab:hover {
 }
 .w-40-px{
 	width: 40px
+}
+.w-75-px{
+	width: 75px
 }
 .w-200-px{
 	width: 200px
