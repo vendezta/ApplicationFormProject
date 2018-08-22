@@ -1,6 +1,11 @@
 package com.tanatat.bean;
 
+import org.apache.log4j.Logger;
+
 public class PersonalInformationBean {
+	private static Logger log = Logger.getLogger(PersonalInformationBean.class); 
+	
+	
 	private String positionApplied;
 	private String salary;
 	private String thaiName;
@@ -324,7 +329,7 @@ public class PersonalInformationBean {
 		return fatherStatus;
 	}
 
-	public void setFatherAlive(String fatherStatus) {
+	public void setFatherStatus(String fatherStatus) {
 		this.fatherStatus = fatherStatus;
 	}
 
@@ -366,6 +371,55 @@ public class PersonalInformationBean {
 
 	public void setLivingStatus(String livingStatus) {
 		this.livingStatus = livingStatus;
+	}
+	
+	
+	public void toString(PersonalInformationBean bean) {
+		log.debug("positinApplied " + bean.getPositionApplied());
+		log.debug("salary " + bean.getSalary());
+		log.debug("thaiName " + bean.getThaiName());
+		log.debug("nickName " + bean.getNickName());
+		log.debug("age " + bean.getAge());
+		log.debug("engName " + bean.getEngName());
+		log.debug("dateOfBirth " + bean.getDateOfBirth());
+		log.debug("placeOfBirth " + bean.getPlaceOfBirth());
+		log.debug("nationality " + bean.getNationality());
+		log.debug("race " + bean.getRace());
+		log.debug("idCardNo " + bean.getIdCardNo());
+		log.debug("issueByDistrict " + bean.getIssueByDistrict());
+		log.debug("issueByProvince " + bean.getIssueByProvince());
+		log.debug("issueDate " + bean.getIssueDate());
+		log.debug("expiredDate " + bean.getExpiredDate());
+		log.debug("address " + bean.getAddress());
+		log.debug("homePhone " + bean.getHomePhone());
+		log.debug("mobilePhone " + bean.getMobilePhone());
+		log.debug("eMail " + bean.geteMail());
+		log.debug("militaryStatus " + bean.getMilitaryStatus());
+		log.debug("militaryText " + bean.getMilitaryText());
+		log.debug("maritalStatus " + bean.getMaritalStatus());
+		
+		log.debug("spousesName " + bean.getSpousesName());
+		log.debug("spousesOccupation " + bean.getSpousesOccupation());
+		log.debug("spousesWorkPhone " + bean.getSpousesWorkPhone());
+		log.debug("spousesWorkAddress " + bean.getSpousesWorkAddress());
+		log.debug("spousesMobilePhone " + bean.getSpousesMobilePhone());
+		
+		log.debug("numberOfChild " + bean.getNumberOfChild());
+		log.debug("childSex " + bean.getChildSex());
+		log.debug("childAge " + bean.getChildAge());
+		log.debug("childStudying " + bean.getChildStudying());
+		
+		log.debug("fatherName " + bean.getFatherName());
+		log.debug("fatherAge " + bean.getFatherAge());
+		log.debug("fatherOccupation " + bean.getFatherOccupation());
+		log.debug("fatherStatus " + bean.getFatherStatus());
+		
+		log.debug("motherName " + bean.getMotherName());
+		log.debug("motherAge " + bean.getMotherAge());
+		log.debug("motherOccupation " + bean.getMotherOccupation());
+		log.debug("motherStatus " + bean.getMotherStatus());
+		
+		log.debug("livingStatus " + bean.getLivingStatus());
 	}
 	
 }
