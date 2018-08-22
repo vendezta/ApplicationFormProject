@@ -4,7 +4,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
 
-<title>Insert title here</title>
+<title>Application Form</title>
 </head>
 <body style="width: 1366px; height: 1000px;">
 
@@ -51,7 +51,7 @@
 	</div>
 	<div class="container">
 		<div class="row m-0">
-			<form role="form" id="content-form">
+			<form id="content-form" method="post" action="ApplicationFormServlet">
 				<div class="tab-content">
 					<div class="tab-pane active" role="tabpanel" id="personal-inf-content">
 						<h3>Step 1</h3>
@@ -312,13 +312,16 @@
 							<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
 							<li><button type="button" class="btn btn-default next-step">Skip</button></li>
 							<li><button type="button"
-									class="btn btn-primary btn-info-full next-step btn-submit">Save
-									and continue</button></li>
+									class="btn btn-primary btn-info-full next-step btn-submit">Continue</button></li>
 						</ul>
 					</div>
 					<div class="tab-pane" role="tabpanel" id="other-inf-content">
 						<h3>Finally</h3>
 						<p>Other Infomation</p>
+						<ul class="list-inline pull-right">
+							<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+							<li><button type="submit" class="btn btn-primary btn-info-full next-step btn-submit">Save</button></li>
+						</ul>
 					</div>
 					<div class="clearfix"></div>
 				</div>
