@@ -56,7 +56,7 @@ public class ApplicationFormServlet extends HttpServlet {
 		
 		String militaryStatus = request.getParameter("militaryStatus");
 		String militaryText = null;
-		
+		 
 		if (militaryStatus != null) {
 			if (militaryStatus.equalsIgnoreCase("notServed")) {
 				militaryText = request.getParameter("notServedText");
