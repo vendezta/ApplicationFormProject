@@ -1,6 +1,9 @@
 package com.tanatat.servlet;
 
 import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.tanatat.bean.EducationInfomation;
 import com.tanatat.bean.PersonalInformationBean;
 
 /**
@@ -72,15 +76,17 @@ public class ApplicationFormServlet extends HttpServlet {
 		
 		String maritalStatus = request.getParameter("maritalStatus");
 		
-		if(!maritalStatus.equalsIgnoreCase("single")) {
-			personalInfoBean.setSpousesName(request.getParameter("spousesName"));
-			personalInfoBean.setSpousesOccupation(request.getParameter("spousesOccupation")); 
-			personalInfoBean.setSpousesWorkPhone(request.getParameter("spousesWorkPhone"));
-			personalInfoBean.setSpousesWorkAddress(request.getParameter("spousesWorkAddress"));
-			personalInfoBean.setSpousesMobilePhone(request.getParameter("spousesMobilePhone"));
+		if("".equals(maritalStatus) || maritalStatus != null) {
+			if(!maritalStatus.equalsIgnoreCase("single")) {
+				personalInfoBean.setSpousesName(request.getParameter("spousesName"));
+				personalInfoBean.setSpousesOccupation(request.getParameter("spousesOccupation")); 
+				personalInfoBean.setSpousesWorkPhone(request.getParameter("spousesWorkPhone"));
+				personalInfoBean.setSpousesWorkAddress(request.getParameter("spousesWorkAddress"));
+				personalInfoBean.setSpousesMobilePhone(request.getParameter("spousesMobilePhone"));
+			}
+			
+			personalInfoBean.setMaritalStatus(maritalStatus);
 		}
-		
-		personalInfoBean.setMaritalStatus(maritalStatus);
 		
 		personalInfoBean.setNumberOfChild(request.getParameter("numberOfChild")); 
 		personalInfoBean.setChildSex(request.getParameter("childSex")); 
@@ -101,6 +107,33 @@ public class ApplicationFormServlet extends HttpServlet {
 		
 		return personalInfoBean;
 	}
+	
+	public List<EducationInfomation> getEducationInformation(HttpServletRequest request) {
+		
+		ArrayList<EducationInfomation> educationList = null;
+		
+		String[] schoolnNames = request.getParameterValues("school-name");
+		String[] disciplines = request.getParameterValues("discipline");
+		String[] effAcademicYears = request.getParameterValues("eff-academic-year");
+		String[] endAcademicYears = request.getParameterValues("end-academic-year");
+		
+		if(schoolnNames != null && schoolnNames.length > 0) {
+			educationList = new ArrayList<EducationInfomation>();
+			
+			for (int i = 0; i < schoolnNames.length; i++) {
+				EducationInfomation eduBean = new EducationInfomation();
+				
+				eduBean.setSchoolnName(schoolnNames[i]);
+				eduBean.setDiscipline(disciplines[i]);
+				eduBean.setEffAcademicYear(effAcademicYears[i]);
+				eduBean.setEndAcademicYear(endAcademicYears[i]);
+				
+				educationList.add(eduBean);
+			}
+		}
+		return educationList;
+	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -110,7 +143,12 @@ public class ApplicationFormServlet extends HttpServlet {
 		// Step1 Personal Inofmation
 		PersonalInformationBean personalInfoBean = getPersonalInformation(request,response);
 		personalInfoBean.toString(personalInfoBean);
-				
+		
+		
+		// Step2 Education Infomation
+		List<EducationInfomation> educationInfoList = getEducationInformation(request);
+		log.debug("educationInfoList "  + educationInfoList.size());
+		
 		// redirect 
 		response.sendRedirect("index.html"); 
 	}
