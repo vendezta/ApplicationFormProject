@@ -38,7 +38,7 @@ public class ApplicationFormServlet extends HttpServlet {
 
 	private final static String sqlInsertPersonalInfo = "INSERT INTO personal_info (ID_CARD_NO,	POSITION_APPLY, SALARY,THAI_NAME, NICK_NAME, ENG_NAME,DOB,PLACE_OF_BIRTH,RACE, NATIONALITY, ID_CARD_ISSUE_DISTRICT, ID_CARD_ISSUE_PROVINCE,ID_CARD_ISSUE_DATE, ID_CARD_EXPIRED_DATE, ADDRESS,HOME_PHONE, MOBILE_PHONE,E_MAIL,MILITARY_STATUS,MILITARY_REASON,MARITAL_STATUS, SPOUSE_NAME,SPOUSE_OCCUPATION,	SPOUSE_WORK_PHONE,SPOUSE_WORK_ADDRESS,SPOUSE_MOBILE_PHONE,NUMBER_OF_CHILD,CHILD_AGE,CHILD_STUDYING,	FATHER_NAME,FATHER_AGE,	FATHER_OCCUPATION,FATHER_STATUS,MOTHER_NAME,MOTHER_AGE,	MOTHER_OCCUPATION,MOTHER_STATUS,LIVING_STATUS) VALUES (?,?,?,?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
-	private final static String sqlInsertEducationInfo = "";
+	private final static String sqlInsertEducationInfo = "INSERT INTO education_info (ID_CARD_NO, SCHOOL_NAME, DISCIPLINE, EFF_YEAR, END_YEAR) VALUES (?,?,?,?,?)";
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -158,6 +158,7 @@ public class ApplicationFormServlet extends HttpServlet {
 
 		if (conn != null) {
 			int insert = 0;
+			String idCard = personalInfoBean.getIdCardNo();
 			try {
 				conn.setAutoCommit(false);
 				PreparedStatement ptmt = null;
@@ -216,7 +217,7 @@ public class ApplicationFormServlet extends HttpServlet {
 					ptmt.setString(29, personalInfoBean.getChildStudying());
 					ptmt.setString(30, personalInfoBean.getFatherName());
 					
-					if(personalInfoBean.getFatherAge() != null) {
+					if(personalInfoBean.getFatherAge() != null && !"".equals(personalInfoBean.getFatherAge())) {
 						ptmt.setInt(31, Integer.parseInt(personalInfoBean.getFatherAge()));
 					} else {
 						ptmt.setInt(31, 0);
@@ -226,7 +227,7 @@ public class ApplicationFormServlet extends HttpServlet {
 					ptmt.setString(33, personalInfoBean.getFatherStatus());
 					
 					ptmt.setString(34, personalInfoBean.getMotherName());
-					if(personalInfoBean.getMotherAge() != null) {
+					if(personalInfoBean.getMotherAge() != null && !"".equals(personalInfoBean.getMotherAge())) {
 						ptmt.setInt(35, Integer.parseInt(personalInfoBean.getMotherAge()));
 					} else {
 						ptmt.setInt(35, 0);
@@ -240,45 +241,42 @@ public class ApplicationFormServlet extends HttpServlet {
 					log.debug("insert =" + insert);
 					
 					DBUtil.closeStatement(ptmt);
-					insert = 0;
 					
-//					if(insert > 0) {
-//						// insert education info
-//						try {
-//							// loop insert
-//							for (Iterator iterator = educationInfoList.iterator(); iterator.hasNext();) {
-//								EducationInfomation educationInfomation = (EducationInfomation) iterator.next();
-//								
-//								ptmt = conn.prepareStatement(sqlInsertEducationInfo);
-//								log.debug("sqlInsertEducationInfo " + sqlInsertEducationInfo);
-//								
-//								stmt.setString(1, bean.getMemberId());
-//								stmt.setString(2, bean.getAccDesc());
-//								stmt.setString(3, bean.getAccRef());
-//								stmt.setBigDecimal(4, bean.getDebit());
-//								stmt.setBigDecimal(5, curBal);
-//								stmt.setBigDecimal(6, newBal);
-//								stmt.setString(7, bean.getAccRemark());
-//								
-//								insert = insert + ptmt.executeUpdate();
-//								log.debug("insert =" + insert);
-//							}
-//							
-//						
-//							
-//						} catch (SQLException e) {
-//							log.error("insert education " + e);
-//							throw e;
-//						} finally {
-//							DBUtil.closeStatement(ptmt);
-//						}
-//						
-//					}
+					if(insert > 0) {
+						// insert education info
+						insert = 0;
+						try {
+							// loop insert
+							for (Iterator iterator = educationInfoList.iterator(); iterator.hasNext();) {
+								EducationInfomation educationInfomation = (EducationInfomation) iterator.next();
+								
+								ptmt = conn.prepareStatement(sqlInsertEducationInfo);
+								log.debug("sqlInsertEducationInfo " + sqlInsertEducationInfo);
+								
+								ptmt.setString(1, idCard);
+								ptmt.setString(2, educationInfomation.getSchoolnName());
+								ptmt.setString(3, educationInfomation.getDiscipline());
+								ptmt.setString(4, educationInfomation.getEffAcademicYear());
+								ptmt.setString(5, educationInfomation.getEndAcademicYear());
+								
+								insert = insert + ptmt.executeUpdate();
+								log.debug("insert =" + insert);
+								
+								DBUtil.closeStatement(ptmt);
+							}
+						} catch (SQLException e) {
+							log.error("insert education " + e);
+							throw e;
+						} finally {
+							DBUtil.closeStatement(ptmt);
+						}
+						
+					}
 					
 					conn.commit();
 
 				} catch (SQLException e) {
-					log.error("getBalance " + e);
+					log.error("SQL Error " + e);
 					throw e;
 				} finally {
 					DBUtil.closeStatement(ptmt);
