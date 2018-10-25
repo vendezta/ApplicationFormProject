@@ -20,7 +20,7 @@ div.wizard-inner {
 	background: #e0e0e0;
 	position: absolute;
 	width: 100%;
-	min-width:1366px;
+	max-width: 1152px;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
@@ -158,7 +158,12 @@ span.round-tab:hover {
 .p-r-0{
 	padding-right: 0px !important;
 }
-
+.p-t-25{
+	padding-top: 25px !important;
+}
+.p-l-0{
+	padding-left: 0px !important;
+}
 .text-center{
 	text-align: center;
 }
@@ -179,6 +184,9 @@ span.round-tab:hover {
 }
 .w-40-px{
 	width: 40px
+}
+.w-75-px{
+	width: 75px
 }
 .w-200-px{
 	width: 200px
@@ -204,4 +212,11 @@ span.round-tab:hover {
 .specialDate { background-color: #6F0 !important; }
 #header{
 	background-color: #03a3e4;
+}
+.m-auto{
+	margin: 0 auto;
+}
+
+#header, h3 {
+	font-weight: bold;
 }
