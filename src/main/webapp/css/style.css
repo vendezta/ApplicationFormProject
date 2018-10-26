@@ -161,6 +161,12 @@ span.round-tab:hover {
 .p-t-25{
 	padding-top: 25px !important;
 }
+.p-b-5{
+	padding-bottom: 5px !important;
+}
+.p-b-50{
+	padding-bottom: 50px !important;
+}
 .p-l-0{
 	padding-left: 0px !important;
 }
@@ -219,4 +225,8 @@ span.round-tab:hover {
 
 #header, h3 {
 	font-weight: bold;
+}
+
+.dsp-inline{
+	display: inline !important;
 }
