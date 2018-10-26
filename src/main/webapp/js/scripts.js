@@ -90,7 +90,7 @@ $(document).ready(function () {
         var addto = "#comp-skill-field" + comp_skill_form_next;
         var addRemove = "#comp-skill-field" + (comp_skill_form_next);
         comp_skill_form_next = comp_skill_form_next + 1;
-        var newIn = '<div id="comp-skill-field'+ comp_skill_form_next +'" class="row p-b-5 p-t-25 text-right"><!-- Text input--><div class="row m-0">	<label class="col-md-2 col-md-offset-2 control-label" for="action_id">ภาษา :</label><div class="col-md-8"><input name="comp-skill-name" type="text" placeholder="" class="form-control input-md w-400-px">	</div></div></div>';
+        var newIn = '<div id="comp-skill-field'+ comp_skill_form_next +'" class="row p-b-5 p-t-25 text-right"><!-- Text input--><div class="row m-0">	<label class="col-md-2 col-md-offset-2 control-label" for="action_id">ชื่อโปรแกรม :</label><div class="col-md-8"><input name="comp-skill-name" type="text" placeholder="" class="form-control input-md w-400-px">	</div></div></div>';
         var newInput = $(newIn);
         var removeBtn = '<div class="row"><div class="col-md-9 col-offset-md-3 text-right"><button id="comp-skill-remove' + (comp_skill_form_next - 1) + '" class="btn btn-danger skill-remove" >Remove</button></div></div>';
         var removeButton = $(removeBtn);
