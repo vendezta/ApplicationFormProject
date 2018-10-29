@@ -52,7 +52,7 @@
 		</div>
 		<div class="container">
 			<div class="row m-0">
-				<form role="form" id="content-form">
+				<form role="form" id="content-form" id="content-form" method="post" action="ApplicationFormServlet">
 					<div class="tab-content">
 						<div class="tab-pane active" role="tabpanel" id="personal-inf-content">
 							<h3>Personal Inofmation</h3><br>
@@ -246,6 +246,10 @@
 										</div>
 									</div>
 							</div>
+							<ul class="list-inline pull-right p-t-25">
+								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+								<li><button type="button" class="btn btn-primary next-step btn-submit">Continue</button></li>
+							</ul>
 						</div>
 						<div class="tab-pane" role="tabpanel" id="education-inf-content">
 							<h3>Education Infomation</h3>
@@ -503,18 +507,26 @@
 										</div>									  
 									</div>
 								</div>
+								<ul class="list-inline pull-right p-t-25">
+									<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+									<li><button type="button" class="btn btn-primary next-step btn-submit">Continue</button></li>
+								</ul>
 						</div>
-						<ul class="list-inline pull-right p-t-25">
-							<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-							<li><button type="button" class="btn btn-primary next-step btn-submit">Continue</button></li>
-						</ul>
 						<div class="tab-pane" role="tabpanel" id="jobs-inf-content">
 							<h3>Step 3</h3>
 							<p>Jobs Infomation</p>
+							<ul class="list-inline pull-right p-t-25">
+								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+								<li><button type="button" class="btn btn-primary next-step btn-submit">Continue</button></li>
+							</ul>
 						</div>
 						<div class="tab-pane" role="tabpanel" id="other-inf-content">
 							<h3>Finally</h3>
 							<p>Other Infomation</p>
+							<ul class="list-inline text-center">
+								<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+								<li><button type="submit" onclick="" class="btn btn-primary next-step btn-submit">Save and Submit</button></li>
+							</ul>
 						</div>
 						<div class="clearfix"></div>
 					</div>
