@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 
 import com.tanatat.bean.EducationInfomation;
 import com.tanatat.bean.PersonalInformationBean;
+import com.tanatat.bean.SkillInformation;
 import com.tanatat.util.DBUtil;
 
 /**
@@ -49,7 +50,12 @@ public class ApplicationFormServlet extends HttpServlet {
 	}
 
 	;
-
+	/**
+	 * getPersonalInformation
+	 * @param request
+	 * @param response
+	 * @return PersonalInformationBean
+	 */
 	public PersonalInformationBean getPersonalInformation(HttpServletRequest request, HttpServletResponse response) {
 		PersonalInformationBean personalInfoBean = new PersonalInformationBean();
 		log.debug("=========== Personal Information ============");
@@ -123,8 +129,13 @@ public class ApplicationFormServlet extends HttpServlet {
 
 		return personalInfoBean;
 	}
-
+	/**
+	 * getEducationInformation
+	 * @param request
+	 * @return List<EducationInfomation> 
+	 */
 	public List<EducationInfomation> getEducationInformation(HttpServletRequest request) {
+		log.debug("=========== Education Information ============");
 
 		ArrayList<EducationInfomation> educationList = null;
 
@@ -149,6 +160,30 @@ public class ApplicationFormServlet extends HttpServlet {
 		}
 		return educationList;
 	}
+	
+	/**
+	 * getSkillInformation
+	 * @param request
+	 * @return SkillInformation
+	 */
+	public SkillInformation getSkillInformation(HttpServletRequest request) {
+		log.debug("=========== Skill Information ============");
+		SkillInformation skillInfo = new SkillInformation();
+		
+		String[] langs = request.getParameterValues("skill-name");
+		log.debug("langs " + langs[0]);
+		
+		String[] langSpeakingLv = request.getParameterValues("langSpeakingLv");
+		log.debug("langSpeakingLv " + langSpeakingLv[0]);
+		
+		String[] langReadingLv = request.getParameterValues("langReadingLv");
+		log.debug("langReadingLv " + langReadingLv[0]);
+		
+		String[] langWrittingLv = request.getParameterValues("langWrittingLv");
+		log.debug("langWrittingLv " + langWrittingLv[0]);
+		
+		return skillInfo;
+	}
 
 	public boolean saveData(PersonalInformationBean personalInfoBean, List<EducationInfomation> educationInfoList)
 			throws SQLException {
@@ -172,7 +207,7 @@ public class ApplicationFormServlet extends HttpServlet {
 					ptmt.setString(1, personalInfoBean.getIdCardNo());
 					ptmt.setString(2, personalInfoBean.getPositionApplied());
 
-					if (personalInfoBean.getSalary() != null) {
+					if (personalInfoBean.getSalary() != null && !"".equals(personalInfoBean.getSalary())) {
 						ptmt.setDouble(3, Integer.parseInt(personalInfoBean.getSalary()));
 					} else {
 						ptmt.setDouble(3, 0);
@@ -271,7 +306,7 @@ public class ApplicationFormServlet extends HttpServlet {
 							DBUtil.closeStatement(ptmt);
 						}
 						
-					}
+					}// if insert 
 					
 					conn.commit();
 
@@ -318,16 +353,19 @@ public class ApplicationFormServlet extends HttpServlet {
 		List<EducationInfomation> educationInfoList = getEducationInformation(request);
 		log.debug("educationInfoList " + educationInfoList.size());
 		
+		// get Skill
+		SkillInformation skillInfoBean = getSkillInformation(request);
+		
 		// Step3 Job Infomation
 		
 		// Step4 Other Infomation
 
-		try {
-			saveData(personalInfoBean, educationInfoList);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			saveData(personalInfoBean, educationInfoList);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		// redirect
 		response.sendRedirect("index.html");
