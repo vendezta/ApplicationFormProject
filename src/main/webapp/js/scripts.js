@@ -23,14 +23,20 @@ $(document).ready(function () {
     });
     
     $("#card-id-eff-date, #card-id-end-date, #dob").datepicker({
-   	  defaultViewDate: {
-   	    year: (new Date().getFullYear() + 543),
-   	 	month: (new Date().getMonth()),
-     	day: (new Date().getDate())
-   	  },
-   	  autoclose:true,
-   	  format: 'dd/mm/yyyy'
-   	});
+        defaultViewDate: {
+        year: (new Date().getFullYear() + 543),
+        month: (new Date().getMonth()),
+        day: (new Date().getDate())
+        },
+        autoclose:true,
+        format: 'dd/mm/yyyy'
+    });
+       
+    $("#dateOfStartWork").datepicker({
+        startDate: '1d',
+        autoclose:true,
+        format: 'dd/mm/yyyy'
+    });
     
     $('#card-id-eff-date, #card-id-end-date, #dob').datepicker('update', '17/08/2561');
 
@@ -107,7 +113,63 @@ $(document).ready(function () {
             $(fieldID).remove();
         });
     });
+
+    var exp_form_next = 0;
+    $("#exp-form-add-more").click(function(e){
+        console.log("exp-form-add-more");
+        e.preventDefault();
+        var addto = "#exp-field" + exp_form_next;
+        var addRemove = "#exp-field" + (exp_form_next);
+        exp_form_next = exp_form_next + 1;
+        var newIn = '<div id="exp-field'+ exp_form_next +'" class="p-t-25"><div><label class="col-md-2 col-md-offset-2 control-label" for="action_id">ปี พ.ศ. :</label>  <div class="col-md-8"><input name="exp-year" type="exp-year" placeholder="25xx" class="form-control input-md w-75-px"></div></div><br><br><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">ชื่อสถานที่ทำงาน :</label>  <div class="col-md-8"><input id="company-name" name="company-name" type="text" placeholder="" class="form-control input-md w-400-px"></div></div><br><br><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">ตำแหน่ง :</label>  <div class="col-md-8"><input name="position" id="position" type="text" placeholder="" class="form-control input-md w-400-px"></div></div><br><br><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">สาเหตุที่ออก :</label>  <div class="col-md-8"><input name="reason-for-leaving" id="reason-for-leaving" type="text" placeholder="" class="form-control input-md w-400-px"></div></div><br><br><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">เงินเดือน :</label>  <div class="col-md-8"><input name="income" id="income" type="text" class="form-control input-md w-75-px"></div></div><br><br></div>';
+        var newInput = $(newIn);
+        var removeBtn = '<div class="row"><div class="col-md-9 col-offset-md-3 text-right"><button id="exp-remove' + (exp_form_next - 1) + '" class="btn btn-danger exp-remove" >Remove</button></div></div>';
+        var removeButton = $(removeBtn);
+        $(addto).after(newInput);
+        $(addRemove).after(removeButton);
+        $("#exp-field" + exp_form_next).attr('data-source',$(addto).attr('data-source'));
+        $("#count").val(exp_form_next);
+        $('.exp-remove').click(function(e){
+            e.preventDefault();
+            var fieldNum = this.id.charAt(this.id.length-1);
+            var fieldID = "#exp-field" + fieldNum;
+            console.log(fieldID);
+            $(this).remove();
+            $(fieldID).remove();
+        });
+    });
+
+    $("#ever-accused").click(function(e){
+        $("#accused-content").removeClass("้hide").addClass("show");
+    });
+
+    $("#never-accused").click(function(e){
+        $("#accused-content").removeClass("show").addClass("hide");
+    });
+
+    $("#can-shift-work").click(function(e){
+        $("#shift-work-content").removeClass("show").addClass("hide");
+    });
+
+    $("#cannot-shift-work").click(function(e){
+        $("#shift-work-content").removeClass("้hide").addClass("show");
+    });
     
+    $("#has-guarantor").click(function(e){
+        $("#guarantor-content").removeClass("show").addClass("hide");
+    });
+
+    $("#not-has-guarantor").click(function(e){
+        $("#guarantor-content").removeClass("้hide").addClass("show");
+    });
+
+    $("#never-sick").click(function(e){
+        $("#sick-content").removeClass("show").addClass("hide");
+    });
+
+    $("#ever-sick").click(function(e){
+        $("#sick-content").removeClass("้hide").addClass("show");
+    });
 });
 
 function nextTab(elem) {

@@ -238,3 +238,11 @@ span.round-tab:hover {
     border: 1px solid;
     box-shadow: 1px 1px 1px 1px #888888;
 }
+
+.hide{
+	display: none;
+}
+
+.show{
+	display: block;
+}
