@@ -137,6 +137,33 @@ $(document).ready(function () {
             $(this).remove();
             $(fieldID).remove();
         });
+            
+    });
+
+    var contact_person_form_next = 0;
+    $("#contact-person-form-add-more").click(function(e){
+            console.log("contact-person-form-add-more");
+            e.preventDefault();
+            var addto = "#contact-person-field" + contact_person_form_next;
+            var addRemove = "#contact-person-field" + (contact_person_form_next);
+            contact_person_form_next = contact_person_form_next + 1;
+            var newIn = '<div id="contact-person-field'+ contact_person_form_next +'" class="p-t-25"><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">ชื่อ :</label> <div class="col-md-8"><input id="contact-person-first-name" name="contact-person-first-name" type="text" placeholder="" class="form-control input-md w-400-px"></div></div><br><br><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">นามสกุล :</label> <div class="col-md-8">      <input id="contact-person-last-name" name="contact-person-last-name" type="text" placeholder="" class="form-control input-md w-400-px"></div></div><br><br><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">ความสัมพันธ์ :</label> <div class="col-md-8">      <input name="contact-person-relation" id="contact-person-relation" type="text" placeholder="" class="form-control input-md w-400-px"></div></div><br><br><div><label class="col-md-2 col-md-offset-2 control-label" for="discipline">ที่อยุ่ที่ทำงาน :</label> <div class="col-md-8"><input name="contact-person-office-address" id="contact-person-office-address" type="text" placeholder="" class="form-control input-md w-400-px">     </div>      </div>      <br><br>      <div>     <label class="col-md-2 col-md-offset-2 control-label" for="discipline">เบอร์โทรศัพท์ :</label> <div class="col-md-8">      <input name="contact-person-tel" id="contact-person-tel" type="text" placeholder="0xx-xxx-xxxx" class="form-control input-md w-100-px">     </div>      </div> <br><br> <div>     <label class="col-md-2 col-md-offset-2 control-label" for="discipline">ตำแหน่ง :</label> <div class="col-md-8"><input name="contact-person-position" id="contact-person-position" type="text" class="form-control input-md w-200-px"></div></div><br><br></div>';
+            var newInput = $(newIn);
+            var removeBtn = '<div class="row"><div class="col-md-9 col-offset-md-3 text-right"><button id="contact-person-remove' + (contact_person_form_next - 1) + '" class="btn btn-danger contact-person-remove" >Remove</button></div></div>';
+            var removeButton = $(removeBtn);
+            $(addto).after(newInput);
+            $(addRemove).after(removeButton);
+            $("#contact-person-field" + contact_person_form_next).attr('data-source',$(addto).attr('data-source'));
+            $("#count").val(contact_person_form_next);
+            $('.contact-person-remove').click(function(e){
+                e.preventDefault();
+                var fieldNum = this.id.charAt(this.id.length-1);
+                var fieldID = "#contact-person-field" + fieldNum;
+                console.log(fieldID);
+                $(this).remove();
+                $(fieldID).remove();
+            });
+            
     });
 
     $("#ever-accused").click(function(e){
